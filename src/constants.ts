@@ -1,0 +1,1 @@
+export const magicV2 = 0x733A;

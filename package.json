@@ -1,0 +1,29 @@
+{
+  "name": "votifier-x",
+  "module": "index.ts",
+  "version": "0.1.0",
+  "description": "Votifier implementation in TypeScript. Including standalone server and client.",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "tsup": "^8.3.5"
+  },
+  "scripts": {
+    "dev-server": "bun test/server.js",
+    "dev-client": "bun test/client.js",
+    "build": "tsup"
+  },
+  "keywords": [
+    "minecraft",
+    "votifier"
+  ],
+  "author": "tutinoko2048",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ]
+}
