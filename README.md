@@ -1,7 +1,7 @@
 # VotifierX
 [![npm](https://img.shields.io/npm/v/votifier-x)](https://www.npmjs.com/package/votifier-x)
 
-A simple [Votifier]() implementation in TypeScript. Including a Votifier (v2) standalone server and client.
+A simple [Votifier](https://github.com/NuVotifier/NuVotifier) implementation in TypeScript. Including standalone server and client of Votifier v2 protocol.
 
 ## Installation
 ```bash
@@ -42,6 +42,6 @@ await client.sendVote({
 ```
 
 ## Acknowledgements
-- [Votifier](https://github.com/vexsoftware/votifier)
 - [NuVotifier](https://github.com/NuVotifier/NuVotifier)
+- [Votifier(original)](https://github.com/vexsoftware/votifier)
 - [votifier2-js](https://github.com/NuVotifier/votifier2-js) Votifier v2 implementation in JavaScript
