@@ -124,5 +124,5 @@ export class VotifierServer extends EventEmitter {
 export interface VotifierServer {
   on(event: 'listen', listener: () => void): this;
   on(event: 'vote', listener: (vote: VotifierPayload) => void): this;
-  on(event: 'error', listener: () => void): this;
+  on(event: 'error', listener: (error: any) => void): this;
 }

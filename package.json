@@ -1,6 +1,5 @@
 {
   "name": "votifier-x",
-  "module": "index.ts",
   "version": "0.1.0",
   "description": "Votifier implementation in TypeScript. Including standalone server and client.",
   "exports": {
@@ -15,7 +14,8 @@
   "scripts": {
     "dev-server": "bun test/server.js",
     "dev-client": "bun test/client.js",
-    "build": "tsup"
+    "build": "tsup",
+    "lint": "tsc --noEmit"
   },
   "keywords": [
     "minecraft",
