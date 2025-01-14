@@ -1,5 +1,6 @@
 tokens.json
 bun.lockb
+package-lock.json
 
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
