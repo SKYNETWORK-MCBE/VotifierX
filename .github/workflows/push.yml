@@ -20,7 +20,7 @@ jobs:
     name: Release Package
     runs-on: ubuntu-latest
     needs: lint
-    if: github.ref == 'release' # Only run on release branch
+    if: github.ref_name == 'release' # Only run on release branch
     steps:
       - uses: actions/checkout@v4
 
