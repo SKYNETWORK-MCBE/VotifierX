@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import { createServer, Server, Socket } from 'net';
 import { TokenManager } from './tokens';
 import { magicV2 } from '../constants';
+import { InvalidChallengeError, InvalidSignatureError, ProtocolError, UnknownServiceError, VotifierError } from './error';
 import type { VotifierMessage, VotifierPayload, VotifierResponse } from '../types';
 import { createHmac } from 'crypto';
 
@@ -58,6 +59,9 @@ export class VotifierServer extends EventEmitter {
       try {
         payload = this.decode(data, challenge);
       } catch (error: any) {
+        if (error instanceof VotifierError) {
+          error.remoteAddress = socket.remoteAddress;
+        }
         return handleError(error);
       }
 
@@ -76,7 +80,7 @@ export class VotifierServer extends EventEmitter {
   private decode(data: Buffer, challenge: string): VotifierPayload {
     const magic = data.readUInt16BE(0);
     if (magic !== magicV2) {
-      throw new Error('This server only accepts well-formed Votifier v2 packets.');
+      throw new ProtocolError('This server only accepts well-formed Votifier v2 packets.');
     }
 
     const messageLength = data.readUInt32BE(2);
@@ -87,14 +91,14 @@ export class VotifierServer extends EventEmitter {
 
     // verify challenge
     if (payload.challenge !== challenge) {
-      throw new Error('Challenge is not valid');
+      throw new InvalidChallengeError();
     }
 
     let token = this.tokenManager.getToken(payload.serviceName);
     if (!token) {
       token = this.tokenManager.getToken('default');
       if (!token) {
-        throw new Error(`Unknown service '${payload.serviceName}'`);
+        throw new UnknownServiceError(payload.serviceName);
       }
     }
 
@@ -102,9 +106,9 @@ export class VotifierServer extends EventEmitter {
     const serverSignature = createHmac('sha256', token)
       .update(message.payload)
       .digest('base64');
-    
+
     if (message.signature !== serverSignature) {
-      throw new Error('Signature is not valid (invalid token?)');
+      throw new InvalidSignatureError();
     }
 
     return payload;
