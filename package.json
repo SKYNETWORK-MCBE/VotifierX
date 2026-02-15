@@ -1,6 +1,6 @@
 {
   "name": "votifier-x",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Votifier implementation in TypeScript. Including standalone server and client.",
   "exports": {
     "types": "./dist/index.d.ts",
