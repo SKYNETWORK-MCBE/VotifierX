@@ -1,3 +1,5 @@
+English | [日本語](README_ja.md)
+
 # VotifierX
 [![npm](https://img.shields.io/npm/v/votifier-x)](https://www.npmjs.com/package/votifier-x)
 
@@ -40,6 +42,19 @@ await client.sendVote({
   address: 'address',
 });
 ```
+
+## Tokens Configuration (`tokens.json`)
+
+The server uses a `tokens.json` file to authenticate incoming votes from different voting lists. It is a simple key-value JSON object where keys are the `serviceName` and values are the corresponding token strings.
+
+```json
+{
+  "default": "auto-generated-token-string",
+  "your-service-name": "another-token-here"
+}
+```
+
+If the specified `tokenPath` file does not exist when the server starts, the server will automatically generate a new configuration file containing a single `default` token. You will need to provide this token when you register your server on a voting list.
 
 ## Acknowledgements
 - [NuVotifier](https://github.com/NuVotifier/NuVotifier)
